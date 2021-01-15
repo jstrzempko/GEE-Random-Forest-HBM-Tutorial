@@ -36,17 +36,18 @@ In response, Random forest classification was developed where multiple decision 
   + we will use to select our region of interest and visualize country boundaries in relation to analysis outputs
 
 # Set-Up
-It is recommended that users have a working knowledge of JavaScript for Earth Engine before starting this tutorial. Sample code (that can be cut and pasted into the code editor) will be provided to guide the user along, but previous exposure to this mode of analysis and relevant syntax will enhance learning. Provided below are several introductory sites to get started.
+
+Users will need an Earth Engine account, which can be set up through an existing google account. Google “Sign up for Google Earth Engine” or visit [https://signup.earthengine.google.com](https://signup.earthengine.google.com) and an email will be sent to your gmail inbox when you are approved. Visit [code.earthengine.google.com](https://code.earthengine.google.com/) to get started. 
+
+It is recommended that users have a working knowledge of JavaScript for Earth Engine before starting this tutorial. Sample code (that can be cut and pasted into the code editor) will be provided to guide the user along, but previous exposure to this mode of analysis and relevant syntax will enhance learning. Provided below are several introductory links to get started.
 
 [**Introduction to JavaScript for Earth Engine**](https://developers.google.com/earth-engine/tutorials/tutorial_js_01) *(good overview of commonly used statements and basic data types)*
 
 [**Get Started with Earth Engine**](https://developers.google.com/earth-engine/guides/playground) *(helpful in exploring/locating parts of the Google Earth Engine Application Programming Interface (API))*
 
-Additionally, users will need an Earth Engine account. It is easiest if you have an existing google account. Google “Sign up for Google Earth Engine” or visit https://signup.earthengine.google.com and an email will be sent to your inbox when you are approved. Visit code.earthengine.google.com to get started. 
-
 # Tutorial
 
-Link to final code: https://code.earthengine.google.com/10a6b8ef6aca75843c27ec161cf16a92
+**[Link to Final Code](https://code.earthengine.google.com/10a6b8ef6aca75843c27ec161cf16a92)**
 
 ## Import Vicguna Data
 
