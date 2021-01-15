@@ -27,11 +27,11 @@ In response, Random forest classification was developed where multiple decision 
   + formally `WorldClim BIO Variables V1`, a set of 19 global “bioclimatic” variables, compiled by [Fick & Hijmans at University of California, Berkeley](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/joc.5086)
   + average values of bioclimatic variables for 1970-2000  at 1-kilometer spatial resolution
   + we will select bands corresponding to annual mean temperature and annual precipitation
-* **Landsat 8 Data**: atmospherically corrected surface reflectance available through the Google Earth Engine search bar
+* **`Landsat 8 Data`**: atmospherically corrected surface reflectance available through the Google Earth Engine search bar
   + formally `USGS Landsat 8 Surface Reflectance Tier 1 data`, collected by [USGS EROS](https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C01_T1_SR)
   + 30-meters spatial resolution, we will filter for low cloud cover across 2019 to create composite bands
   + we will select the visible, near-infrared, short-wave infrared, and thermal infrared bands
-* **Country Boundaries**: international boundary polygons available from Google Earth Engine search bar
+* **`Country Boundaries`**: international boundary polygons available from Google Earth Engine search bar
   + formally `LSIB: Large Scale International Boundary Polygons`, collected by the [US Dept of State](https://developers.google.com/earth-engine/datasets/catalog/USDOS_LSIB_2017)
   + we will use to select our region of interest and visualize country boundaries in relation to analysis outputs
 
