@@ -32,10 +32,9 @@ Lastly, for visualization purposes, the LSIB: Large Scale International Boundary
 
 It is recommended that users have a working knowledge of JavaScript for Earth Engine before starting this tutorial. Sample code (that can be cut and pasted into the code editor) will be provided to guide the user along, but previous exposure to this mode of analysis and relevant syntax will enhance learning. Provided below are several introductory sites to get started.
 
-Introduction to JavaScript for Earth Engine: https://developers.google.com/earth-engine/tutorial_js_01
-(good overview of commonly used statements and basic data types)
-Get Started with Earth Engine: https://developers.google.com/earth-engine/getstarted#the-code-editor
-(helpful in exploring/locating parts of the Google Earth Engine Application Programming Interface (API))
+[**Introduction to JavaScript for Earth Engine**](https://developers.google.com/earth-engine/tutorials/tutorial_js_01) *(good overview of commonly used statements and basic data types)*
+
+[**Get Started with Earth Engine**](https://developers.google.com/earth-engine/guides/playground) *(helpful in exploring/locating parts of the Google Earth Engine Application Programming Interface (API))*
 
 Additionally, users will need an Earth Engine account. It is easiest if you have an existing google account. Google “Sign up for Google Earth Engine” or visit https://signup.earthengine.google.com and an email will be sent to your inbox when you are approved. Visit code.earthengine.google.com to get started. 
 
