@@ -18,7 +18,12 @@ In response, Random forest classification was developed where multiple decision 
 
 # Data
 
-Data for this tutorial is sourced from class resources (TerrSet tutorial data) as well as datasets readily available through Google Earth Engine. The first dataset to import is a point shapefile of observations of vicugna in South America. These were originally part of Exercise 6-3 HBM: Maxent in Chapter 6 of the TerrSet Tutorial. In order for Google Earth Engine to read these files, they need to be run through SHAPEIDR in TerrSet to convert from a .vct to a .shp file type. At this stage, “absence” points were added to the dataset in regions where it would be extremely unlikely to find vicugna (e.g. Amazon rainforest, lake, or coast) using ArcMap. In future applications, the location of these points should be based off expert or field-based recommendations. These points were given a presence value of 0 while original observation points were given a presence value of 1. Next, this shapefile was sent to a zipped folder so that Google Earth Engine could read it as a single file. This zipped folder is provided with this final project for ease of access. 
+* Point shapefile of observations of vicugna in South America sourced from TerrSet tutorial data (Chapter 6 Exercise 6-3 HBM: Maxent). 
+  + converted from `.vct` to `.shp` in TerrSet's SHAPEIDR
+  + "absence" points added in ArcMap - representing regions where it would be extremely unlikely to find vicugna (e.g. Amazon rainforest, lake, or coast)
+
+
+In future applications, the location of these points should be based off expert or field-based recommendations. These points were given a presence value of 0 while original observation points were given a presence value of 1. Next, this shapefile was sent to a zipped folder so that Google Earth Engine could read it as a single file. This zipped folder is provided with this final project for ease of access. 
 
 The analysis will also be based off open source environmental variables gathered from the Google Earth Engine search bar. Users should first search for WorldClim BIO Variables V1, a set of 19 global “bioclimatic” variables, compiled by University of California, Berkeley (Fick & Hijmans, 2017). They represent average values of various climatic variables for the years 1970-2000 and are available at a 1-kilometer spatial resolution. In the tutorial, users will learn how to select bands corresponding to annual mean temperature and annual precipitation. 
 
@@ -26,8 +31,7 @@ Additionally, users will search for and import USGS Landsat 8 Surface Reflectanc
 
 Lastly, for visualization purposes, the LSIB: Large Scale International Boundary Polygons, Detailed dataset will be used to select a region of interest and visualize country boundaries in relation to the analysis outputs (US Dept of State, 2017). 
 
-# Methodology
-
+# Set-Up
 It is recommended that users have a working knowledge of JavaScript for Earth Engine before starting this tutorial. Sample code (that can be cut and pasted into the code editor) will be provided to guide the user along, but previous exposure to this mode of analysis and relevant syntax will enhance learning. Provided below are several introductory sites to get started.
 
 [**Introduction to JavaScript for Earth Engine**](https://developers.google.com/earth-engine/tutorials/tutorial_js_01) *(good overview of commonly used statements and basic data types)*
@@ -36,7 +40,7 @@ It is recommended that users have a working knowledge of JavaScript for Earth En
 
 Additionally, users will need an Earth Engine account. It is easiest if you have an existing google account. Google “Sign up for Google Earth Engine” or visit https://signup.earthengine.google.com and an email will be sent to your inbox when you are approved. Visit code.earthengine.google.com to get started. 
 
-# Results
+# Tutorial
 
 Link to final code: https://code.earthengine.google.com/10a6b8ef6aca75843c27ec161cf16a92
 
