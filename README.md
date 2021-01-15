@@ -18,18 +18,22 @@ In response, Random forest classification was developed where multiple decision 
 
 # Data
 
-* Point shapefile of observations of vicugna in South America sourced from TerrSet tutorial data (Chapter 6 Exercise 6-3 HBM: Maxent). 
+* **`data/vicugna_final.zip`**: Point shapefile of observations of vicugna in South America sourced from TerrSet tutorial data (Chapter 6 Exercise 6-3 HBM: Maxent). 
   + converted from `.vct` to `.shp` in TerrSet's SHAPEIDR
   + "absence" points added in ArcMap - representing regions where it would be extremely unlikely to find vicugna (e.g. Amazon rainforest, lake, or coast)
-
-
-In future applications, the location of these points should be based off expert or field-based recommendations. These points were given a presence value of 0 while original observation points were given a presence value of 1. Next, this shapefile was sent to a zipped folder so that Google Earth Engine could read it as a single file. This zipped folder is provided with this final project for ease of access. 
-
-The analysis will also be based off open source environmental variables gathered from the Google Earth Engine search bar. Users should first search for WorldClim BIO Variables V1, a set of 19 global “bioclimatic” variables, compiled by University of California, Berkeley (Fick & Hijmans, 2017). They represent average values of various climatic variables for the years 1970-2000 and are available at a 1-kilometer spatial resolution. In the tutorial, users will learn how to select bands corresponding to annual mean temperature and annual precipitation. 
-
-Additionally, users will search for and import USGS Landsat 8 Surface Reflectance Tier 1 data (USGS EROS, 2013). From these bands of atmospherically corrected surface reflectance, users will select the visible, near-infrared, short-wave infrared, and thermal infrared bands (effectively excluding the aerosol attributes, pixel quality attributes, and radiometric saturation quality assessment bands). Landsat 8 data is available at 30-meters spatial resolution and will be filtered for low cloud cover across 2019 to create composite bands.
-
-Lastly, for visualization purposes, the LSIB: Large Scale International Boundary Polygons, Detailed dataset will be used to select a region of interest and visualize country boundaries in relation to the analysis outputs (US Dept of State, 2017). 
+  + "absence" points given a value of 0, "presence" points given a value of 1
+  + sent to a zipped folder so GEE will read as a single file
+* **`WorldClim 2`**: open source bioclimatic variables available through the Google Earth Engine search bar
+  + formally `WorldClim BIO Variables V1`, a set of 19 global “bioclimatic” variables, compiled by [Fick & Hijmans at University of California, Berkeley](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/joc.5086)
+  + average values of bioclimatic variables for 1970-2000  at 1-kilometer spatial resolution
+  + we will select bands corresponding to annual mean temperature and annual precipitation
+* **Landsat 8 Data**: atmospherically corrected surface reflectance available through the Google Earth Engine search bar
+  + formally `USGS Landsat 8 Surface Reflectance Tier 1 data`, collected by [USGS EROS](https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C01_T1_SR)
+  + 30-meters spatial resolution, we will filter for low cloud cover across 2019 to create composite bands
+  + we will select the visible, near-infrared, short-wave infrared, and thermal infrared bands
+* **Country Boundaries**: international boundary polygons available from Google Earth Engine search bar
+  + formally `LSIB: Large Scale International Boundary Polygons`, collected by the [US Dept of State](https://developers.google.com/earth-engine/datasets/catalog/USDOS_LSIB_2017)
+  + we will use to select our region of interest and visualize country boundaries in relation to analysis outputs
 
 # Set-Up
 It is recommended that users have a working knowledge of JavaScript for Earth Engine before starting this tutorial. Sample code (that can be cut and pasted into the code editor) will be provided to guide the user along, but previous exposure to this mode of analysis and relevant syntax will enhance learning. Provided below are several introductory sites to get started.
