@@ -51,22 +51,30 @@ It is recommended that users have a working knowledge of JavaScript for Earth En
 
 ## Import Vicguna Data
 
-1.To begin, we are going to import the vicugna shapefilefrom a zipped folder. Navigate to the Asset tab on the left side of the screen and click the large red drop-down menu labeled “New.” Select Shapefile (.shp, .shx, .dbf, .prj, .zip)under the Table Upload option and the window “Upload a new shapefile asset” will appear(Figure 1). 
+* To begin, import the vicugna shapefile from a zipped folder. Navigate to the **Asset tab** on the left side of the screen and click the large red drop-down menu labeled **New**. Select Shapefile (.shp, .shx, .dbf, .prj, .zip) under the Table Upload option and the window *Upload a new shapefile asset* will appear as shown below.
 
-2.You can upload multiple files at one time, but they must all correspond to the same shapefile. Rather than selecting each file separately, we will be uploading a zipped folder which contains all relevant files. Under source files, hit the select button and navigate to where your vicugna zipped folder is on your computer and select to open it. Name the asset “vicguna,” leave all other properties as default, and scroll down to select upload. 
+<p align="center">
+  <img src="images/assets.PNG" width="600" />
+</p>
 
-3.At this point, your Tasks tab on the right side of thescreenmay blink orange indicating that there are unseen tasks occurring. Click on this tab and you should see your asset being ingested. This may take a few minutes. 
+<p align="center">
+  <img src="images/assets2.PNG" width="600" />
+</p>
 
-4.When Earth Engine is done ingesting your asset, it will appear blue in the Tasks tab. If it hasn’t already appeared in your Assets tab then hit the refresh button and “vicguna” should be added to the list. When you hover over an asset, three icons will appear: Share, Rename, Import into Script. Select the arrow to Import into Script and the “vicguna” table with its pathname will be added to your list of imports at the top of the code editor. Change the variable name to “vicguna.”
+* You can upload multiple files at one time, but they must all correspond to the same shapefile. Rather than selecting each file separately, we will be uploading a zipped folder which contains all relevant files. Under source files, hit the **select button** and navigate to where your vicugna zipped folder is on your computer and select to open it. Name the asset *vicguna*, leave all other properties as default, and scroll down to **select upload**. 
 
-5.Visualize this data by adding this statement to your code and running the script (Ctrl + Enter) or hitting the run button at the top of the code editor:
+* At this point, your Tasks tab on the right side of thescreenmay blink orange indicating that there are unseen tasks occurring. Click on this tab and you should see your asset being ingested. This may take a few minutes. 
 
-i.Map.addLayer(vicugna, {}, ‘Vicugna Data’);(if you need help understanding this code, type Map.addLayer into the Docs search bar on the left side of the screen. This documentation gives the inputs, outputs, and arguments to a statement –for instance, we want to add our layer “vicugna” to the map with default palette {}, and name it “Vicugna Data”)
+* When Earth Engine is done ingesting your asset, it will appear blue in the **Tasks tab**. If it hasn’t already appeared in your **Assets tab** then hit the refresh button and *vicguna* should be added to the list. When you hover over an asset, three icons will appear: Share, Rename, Import into Script. Select the arrow to **Import into Script** and the *vicguna* table with its pathname will be added to your list of imports at the top of the code editor. Change the variable name to *vicugna*.
 
-6.On the right side of the screen, select the Inspector tab. Now, when you click on features in the map, information about them will appear in the Console tab. Investigate the data by clicking on points. Pay particular attention to the value of the ‘presence’ property. 
+* Visualize this data by adding this statement to your code and running the script (Ctrl + Enter) or hitting the **run button** at the top of the code editor:
+  + `Map.addLayer(vicugna, {}, ‘Vicugna Data’)` *(if you need help understanding this code, type Map.addLayer into the **Docs search bar** on the left side of the screen. This documentation gives the inputs, outputs, and arguments to a statement – for instance, we want to add our layer “vicugna” to the map with default palette {}, and name it “Vicugna Data”)*
 
-7.Next, we will create a variable called “label” in which we will store the property ‘presence.’ When the data was created, locations were vicugna were observed were 
-given a value of 0, while areas of extreme unlikely for this species were givena value of 0in a column labeled ‘presence.’We will base the creation of our classification off this property. i.var label = 'presence';
+* On the right side of the screen, select the **Inspector tab**. Now, when you click on features in the map, information about them will appear in the **Console tab**. Investigate the data by clicking on points. Pay particular attention to the value of the *presence* property. 
+
+* Next, we will create a variable called *label* in which we will store the property *presence*. When the data was created, locations where vicugna were observed were 
+given a value of 1, while areas of extreme unlikeliness for this species were givena value of 0 in a column labeled *presence*. We will base the creation of our classification off this property. 
+  + `var label = 'presence'`
 
 ## Decide on a Region of Interest
 
