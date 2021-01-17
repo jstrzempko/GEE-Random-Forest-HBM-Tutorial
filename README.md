@@ -164,7 +164,7 @@ function maskL8(image) {
 * In order to run the classification, we will need all of our environmental variables in one variable that we can reference. If you included the Landsat 8 bands, you need to create a new variable called *L8_bands* which excludes the pixel qa, aerosol, and radarsat bands. If you did not run the Landsat 8 steps, then you can simply add the temperature data to the precipitation data to create a new composite variable. In both cases, we need a variable *bands* which includes the names of all the bands in this composite variable. 
   + *First option* 
   
-```
+```javascript
 var enviro = temp.addBands(precip);
 var bands = enviro.bandNames();
 ```
@@ -210,11 +210,11 @@ Map.addLayer(classified_disc,
 * Explore the output. Use the inspector tool and the pan option to move around your image and select regions to investigate their value. When might a map like this be useful?
 
 <p align="center">
-  <img src="images/output2.PNG" width="200" />
+  <img src="images/output2.PNG" width="300" />
 </p>
 
 <p align="center">
-  <img src="images/output4.PNG" width="200" />
+  <img src="images/output4.PNG" width="300" />
 </p>
 
 ## Train and Run a Soft Classifier (probabilities)
@@ -242,11 +242,11 @@ Map.addLayer(classified_prob,
 * Explore the output. Use the **inspector tool** to select certain regions. Compare their values to the discretely classified image. What advantages or disadvantages does this soft classification provide in comparison to the hard classification?
 
 <p align="center">
-  <img src="images/output.PNG" width="200" />
+  <img src="images/output.PNG" width="300" />
 </p>
 
 <p align="center">
-  <img src="images/output3.PNG" width="200" />
+  <img src="images/output3.PNG" width="300" />
 </p>
 
 ## Confusion Matrix representing Re-substitution Accuracy
