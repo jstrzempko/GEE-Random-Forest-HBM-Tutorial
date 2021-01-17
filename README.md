@@ -219,15 +219,72 @@ Map.addLayer(classified_disc,
 
 ## Train and Run a Soft Classifier (probabilities)
 
-1.To compare outputs, we will also run a soft classifier and scale the output probabilities to [0,100] to see gradients of habitat suitability for the vicugna. The same color palette was used for both classifiers to produce acontrast between results.i.var classifier_prob = ee.Classifier.smileRandomForest(20).setOutputMode('PROBABILITY').train({features: training,classProperty: label,inputProperties: bands});2.Again, we will run the classifier on the data and display the output. i.var classified_prob = enviro.select(bands).classify(classifier_prob).multiply(100);Map.addLayer(classified_prob,{min:0, max:100, palette: ['FFFFFF','C6AC94','8D8846','395315','031A00']},"Random Forest Probability");3.Explore the output(Figure 5& 6). Use the inspector tool to select certain regions. Compare their values to the discretely classified image. What advantages or disadvantages does this soft classification provide?
+* To compare outputs, we will also run a soft classifier and scale the output probabilities from 0 to 100 to see gradients of habitat suitability for the vicugna. The same color palette was used for both classifiers to produce acontrast between results.
+
+```javascript
+var classifier_prob = ee.Classifier.smileRandomForest(20).
+setOutputMode('PROBABILITY')
+.train({
+  features: training,
+  classProperty: label,
+  inputProperties: bands});
+```
+
+* Again, we will run the classifier on the data and display the output. 
+
+```javascript
+var classified_prob = enviro.select(bands).classify(classifier_prob).multiply(100);
+Map.addLayer(classified_prob,
+  {min:0, max:100, palette: ['FFFFFF','C6AC94','8D8846','395315','031A00']},
+  "Random Forest Probability");
+```
+
+* Explore the output. Use the **inspector tool** to select certain regions. Compare their values to the discretely classified image. What advantages or disadvantages does this soft classification provide in comparison to the hard classification?
+
+<p align="center">
+  <img src="images/output.PNG" width="200" />
+</p>
+
+<p align="center">
+  <img src="images/output3.PNG" width="200" />
+</p>
 
 ## Confusion Matrix representing Re-substitution Accuracy
 
-1.Earth Engine recommends in its supervised classification tutorial/help documents that you create a confusion matrix (table that describes performance of the algorithm by comparing output data with test data for which values are known). Unfortunately, this data does not have another dataset available for validation (in the way land cover classes might) meaning that resubstitution error is simply the error rate obtained from comparing the training data to the output.The output confusion matrix and accuracy measurement will appear in your Console tab on the right side of the screen.i.var trainAccuracy = classifier_disc.confusionMatrix();print('RF Resubstitution error matrix: ', trainAccuracy);print('RF Training overall accuracy: ', trainAccuracy.accuracy());2.Because each pixel has to be in a certain class for comparison, we can only conduct this on our hard/discrete classified image. Resubstitution error is optimistic and often unrealistic.Further validation data would be needed to generate a cross-validation matrix, which would provide more accurate assessments. 
+* GEE recommends in its supervised classification tutorial/help documents that you create a confusion matrix (table that describes performance of the algorithm by comparing output data with test data for which values are known). Unfortunately, this data does not have another dataset available for validation (in the way land cover classes might) meaning that resubstitution error is simply the error rate obtained from comparing the training data to the output. The output confusion matrix and accuracy measurement will appear in your **Console tab** on the right side of the screen.
+
+```javascript
+var trainAccuracy = classifier_disc.confusionMatrix();
+print('RF Resubstitution error matrix: ', trainAccuracy);
+print('RF Training overall accuracy: ', trainAccuracy.accuracy());
+```
+
+* Because each pixel has to be in a certain class for comparison, we can only conduct this on our hard/discrete classified image. Resubstitution error is optimistic and often unrealistic. Further validation data would be needed to generate a cross-validation matrix, which would provide more accurate assessments. 
 
 ## Additional Step
-1.For visualization purposes, createan emptyimage to paint the roi features into. This will allow us to see country boundaries as outlines(which will be less disruptive to the analysis). i.Map.addLayer(ee.Image().paint(roi, 1, 2), {}, 'Region of Interest');J.ExportImage1.To export the image to your google drive, set the parameters as follows:i.Export.image.toDrive({image: classified_prob,description: 'Random Forest Probability',maxPixels: 1e20,scale: 500,region: roi,folder: 'Advanced_Raster'});2.Once you’ve run the script with this statement, a separate option for you to run the export will appear in your Tasks tab where you can decide on resolution, location, and name of the output image(Figure 7).
+* For visualization purposes, create an empty image to paint the roi features into. This will allow us to see country boundaries as outlines (which will be less disruptive to the analysis). 
+  + `Map.addLayer(ee.Image().paint(roi, 1, 2), {}, 'Region of Interest');`
 
-# Conclusions
+## ExportImage
 
-While the Random Forest classifier is one of many classification methods available in Earth Engine, it is perhaps the most easily understood machine learning algorithm because of its basis in simpler methods. The simple construction and modification of scripts combined with easy access to open source data via the Earth Engine search bar makes this program especially useful in this geoprocessing application. The script from this tutorial can be used with different data or can be expanded upon to test the classification methods with a set of new parameters. Ultimately, the application of Random Forest classification to habitat suitability/biodiversity modeling offers abundant opportunity to explore species distribution through the lens of biodiversityfactors.
+* To export the image to your google drive, set the parameters as follows:
+
+```javascript
+Export.image.toDrive({
+  image: classified_prob,
+  description: 'Random Forest Probability',
+  maxPixels: 1e20,
+  scale: 500,
+  region: roi,
+  folder: 'Advanced_Raster'});
+```
+
+* Once you’ve run the script with this statement, a separate option for you to run the export will appear in your **Tasks** tab where you can decide on resolution, location, and name of the output image.
+
+<p align="center">
+  <img src="images/export.PNG" width="400" />
+</p>
+
+# Takeaways
+
+The Random Forest classifier is one of the most easily understood machine learning algorithm because of its basis in simpler methods. The simple construction and modification of scripts combined with easy access to open source data via the Earth Engine search bar makes this program especially useful in this geoprocessing application. The script from this tutorial can be used with different data or can be expanded upon to run the classification methods with a set of new parameters. Ultimately, the application of Random Forest classification to habitat suitability/biodiversity modeling offers abundant opportunity to explore predictions of species distribution through the lens of bioclimatic factors.
