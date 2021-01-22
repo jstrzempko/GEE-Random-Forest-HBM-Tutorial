@@ -68,13 +68,19 @@ It is recommended that users have a working knowledge of JavaScript for Earth En
 * When Earth Engine is done ingesting your asset, it will appear blue in the **Tasks tab**. If it hasn’t already appeared in your **Assets tab** then hit the refresh button and *vicguna* should be added to the list. When you hover over an asset, three icons will appear: Share, Rename, Import into Script. Select the arrow to **Import into Script** and the *vicguna* table with its pathname will be added to your list of imports at the top of the code editor. Change the variable name to *vicugna*.
 
 * Visualize this data by adding this statement to your code and running the script (Ctrl + Enter) or hitting the **run button** at the top of the code editor:
-  + `Map.addLayer(vicugna, {}, ‘Vicugna Data’);` *(if you need help understanding this code, type Map.addLayer into the **Docs search bar** on the left side of the screen. This documentation gives the inputs, outputs, and arguments to a statement – for instance, we want to add our layer “vicugna” to the map with default palette {}, and name it “Vicugna Data”)*
+
+```javascript
+Map.addLayer(vicugna, {}, ‘Vicugna Data’);
+```
+*(if you need help understanding this code, type Map.addLayer into the **Docs search bar** on the left side of the screen. This documentation gives the inputs, outputs, and arguments to a statement – for instance, we want to add our layer “vicugna” to the map with default palette {}, and name it “Vicugna Data”)*
 
 * On the right side of the screen, select the **Inspector tab**. Now, when you click on features in the map, information about them will appear in the **Console tab**. Investigate the data by clicking on points. Pay particular attention to the value of the *presence* property. 
 
 * Next, we will create a variable called *label* in which we will store the property *presence*. When the data was created, locations where vicugna were observed were 
 given a value of 1, while areas where the species was extremely unlikely to be found were given a value of 0 in a column labeled *presence*. We will base the creation of our classification off this property. 
-  + `var label = 'presence';`
+```javascript
+var label = 'presence';
+```
 
 ## Decide on a Region of Interest
 
@@ -83,14 +89,24 @@ given a value of 1, while areas where the species was extremely unlikely to be f
 * Similar to the vicugna table, this data should appear in your imports. Name it *world*.
 
 * To minimize runtime and increase simplicity of the tutorial, we will select only the country of Peru as our region of interest. To do so, filter the world layer by selecting the feature where the property 'COUNTRY_NA' = 'Peru.'
-  + `var roi = world.filter(ee.Filter.eq('COUNTRY_NA', 'Peru'));`
+
+```javascript
+var roi = world.filter(ee.Filter.eq('COUNTRY_NA', 'Peru'));
+```
 
 * Center the map on this region of interest and set it to a zoom level of 5.
-  + `Map.centerObject(roi, 5);`
+
+```javascript
+Map.centerObject(roi, 5);
+```
 
 * You can also try out a larger analysis region defined by the user rather than country boundaries as shown below. To do so, navigate to the map below and look to the upper left-hand corner. Here you can manage and create geometry imports (points, lines, polygons, and rectangles). Zoom out so your map includes all of Peru and Bolivia and draw a rectangle that encompasses these countries. Under geometry imports, select *edit layer properties* and rename the layer *vicguna_region*. It will appear with your *world* and *vicugna* imports from previous steps. Comment out the previous roi variable (by adding // before the statement) and add this code: 
-  + `var roi = vicugna_region;`
-  + `Visualize this new roi: Map.addLayer(roi, {}, 'Region of Interest');`
+
+```javascript
+var roi = vicugna_region;
+//Visualize this new roi: 
+Map.addLayer(roi, {}, 'Region of Interest');
+```
 
 <p align="center">
   <img src="images/roi_sq.PNG" width="400" />
@@ -116,26 +132,40 @@ given a value of 1, while areas where the species was extremely unlikely to be f
 * Import the image and name it *bioclim*.
 
 * Next, we will create a new variable called *temp_bioclim* from the mean annual temperature band (bio01). Type and run this code:
-  + `var temp_bioclim = bioclim.select('bio01');`
+
+```javascript
+var temp_bioclim = bioclim.select('bio01');
+```
 
 * We can also create visualization parameters with which to explore the data, by setting minimum and maximum display values and assigning a palette of colors. This visualization variable can be added to our Map.addLayer function.
-  + `var temp_vis = {min: -230.0, max: 300.0,  palette: ['blue', 'purple', 'cyan', 'green', 'yellow', 'red']};`
-  + `Map.addLayer(temp_bioclim, temp_vis, 'Annual Mean Temperature');`
+```javascript
+var temp_vis = {min: -230.0, max: 300.0,  palette: ['blue', 'purple', 'cyan', 'green', 'yellow', 'red']};
+Map.addLayer(temp_bioclim, temp_vis, 'Annual Mean Temperature');
+```
 
 * Once you’ve explore the worldwide temperature trends, we will clip this layer to our roi to increase processing speed. Comment out the previous statement to remove the worldwide data from the map. 
-  + `var temp = temp_bioclim.clip(roi);`
+
+```javascript
+var temp = temp_bioclim.clip(roi);
+```
 
 * Conduct a similar process to obtain and visualize annual precipitation (bio12). Make sure to comment out extraneous statements when done exploring. 
-  + `var precip_bioclim = bioclim.select('bio12');`
-  + `var precip_vis = {min: 0, max: 10000, palette: ['white', '00008B', 'black']};`
-  + `var precip = precip_bioclim.clip(roi);iv.Map.addLayer(precip, precip_vis, 'Annual Precipitation');`
+
+```javascript
+var precip_bioclim = bioclim.select('bio12');
+var precip_vis = {min: 0, max: 10000, palette: ['white', '00008B', 'black']};
+var precip = precip_bioclim.clip(roi);iv.Map.addLayer(precip, precip_vis, 'Annual Precipitation');
+```
   
 ***(Optional Addition of Landsat Data)***
 
 * Similar to previous steps, search for *USGS Landsat 8 Surface Reflectance Tier 1* and import this data. If you’ve ever worked with Landsat data before, Earth Engine gives easy access to all Landsat image collections. Name this import *L8*.
 
 * Next, we want to create a variable of Landsat 8 data filtered for 2019 over our roi.
-  + `var L8_filter = ee.ImageCollection('LANDSAT/LC08/C01/T1_SR').filterBounds(roi).filterDate('2019-01-01', '2019-12-31');`
+
+```javascript
+var L8_filter = ee.ImageCollection('LANDSAT/LC08/C01/T1_SR').filterBounds(roi).filterDate('2019-01-01', '2019-12-31');
+```
 
 * Currently, we have an image collection consisting of surface reflectance for all Landsat bands for all of 2019 over our roi. We will want to create a function to filter out cloudy imagery using a cloud mask. We will use bits 3 and 5 (cloud shadow and cloud) in the pixel quality assessment (QA) band to filter for images where the flags are set to 0 indicating clear conditions. We will scale the image, so values are lie on a scale of 0 to 1.
 
@@ -150,10 +180,16 @@ function maskL8(image) {
 ```
 
 * We will then map this function over the 2019 data, take the median pixel values (so as to avoid the influence of outliers), and clip to our roi. 
-  + `var L8_median = L8_filter.map(maskL8).reduce(ee.Reducer.median()).clip(roi);`
+
+```javascript
+var L8_median = L8_filter.map(maskL8).reduce(ee.Reducer.median()).clip(roi);
+```
 
 * Create a true color composite of the median bands to visualize the images you have just created. We can utilize the visualization parameters to create a composite of 3 bands. 
-  + `Map.addLayer(L8_median, {bands: ['B4_median', 'B3_median', 'B2_median'], min: 0, max: 0.2},'Landsat 8 Composite');`
+
+```javascript
+Map.addLayer(L8_median, {bands: ['B4_median', 'B3_median', 'B2_median'], min: 0, max: 0.2},'Landsat 8 Composite');
+```
 
 <p align="center">
   <img src="images/landsat8.PNG" width="400" />
@@ -182,7 +218,10 @@ var bands = enviro.bandNames();
 ## Sample the Input Imagery to get Training Data
 
 * Next, we will need to create training data by sampling our environmental variables at the points in the vicugna dataset. This will create a feature collection of training data which we can use to train the classifier. We will use the sampleRegions statement across our vicguna selection, making sure that our data is separated across the *label* property (representative of our *presence* classes). 
-  +  `var training = enviro.select(bands).sampleRegions({collection: vicugna,properties: [label],scale: 30});`
+
+```javascript
+var training = enviro.select(bands).sampleRegions({collection: vicugna,properties: [label],scale: 30});
+```
 
 ## Train and Run a Discrete Classifier
 
@@ -263,7 +302,10 @@ print('RF Training overall accuracy: ', trainAccuracy.accuracy());
 
 ## Additional Step
 * For visualization purposes, create an empty image to paint the roi features into. This will allow us to see country boundaries as outlines (which will be less disruptive to the analysis). 
-  + `Map.addLayer(ee.Image().paint(roi, 1, 2), {}, 'Region of Interest');`
+
+```javascript
+Map.addLayer(ee.Image().paint(roi, 1, 2), {}, 'Region of Interest');
+```
 
 ## ExportImage
 
