@@ -164,7 +164,9 @@ var precip = precip_bioclim.clip(roi);iv.Map.addLayer(precip, precip_vis, 'Annua
 * Next, we want to create a variable of Landsat 8 data filtered for 2019 over our roi.
 
 ```javascript
-var L8_filter = ee.ImageCollection('LANDSAT/LC08/C01/T1_SR').filterBounds(roi).filterDate('2019-01-01', '2019-12-31');
+var L8_filter = ee.ImageCollection('LANDSAT/LC08/C01/T1_SR')
+  .filterBounds(roi)
+  .filterDate('2019-01-01', '2019-12-31');
 ```
 
 * Currently, we have an image collection consisting of surface reflectance for all Landsat bands for all of 2019 over our roi. We will want to create a function to filter out cloudy imagery using a cloud mask. We will use bits 3 and 5 (cloud shadow and cloud) in the pixel quality assessment (QA) band to filter for images where the flags are set to 0 indicating clear conditions. We will scale the image, so values are lie on a scale of 0 to 1.
@@ -182,13 +184,17 @@ function maskL8(image) {
 * We will then map this function over the 2019 data, take the median pixel values (so as to avoid the influence of outliers), and clip to our roi. 
 
 ```javascript
-var L8_median = L8_filter.map(maskL8).reduce(ee.Reducer.median()).clip(roi);
+var L8_median = L8_filter.map(maskL8)
+                    .reduce(ee.Reducer.median())
+                    .clip(roi);
 ```
 
 * Create a true color composite of the median bands to visualize the images you have just created. We can utilize the visualization parameters to create a composite of 3 bands. 
 
 ```javascript
-Map.addLayer(L8_median, {bands: ['B4_median', 'B3_median', 'B2_median'], min: 0, max: 0.2},'Landsat 8 Composite');
+Map.addLayer(L8_median, 
+  {bands: ['B4_median', 'B3_median', 'B2_median'], min: 0, max: 0.2},
+  'Landsat 8 Composite'); 
 ```
 
 <p align="center">
