@@ -139,7 +139,8 @@ var temp_bioclim = bioclim.select('bio01');
 
 * We can also create visualization parameters with which to explore the data, by setting minimum and maximum display values and assigning a palette of colors. This visualization variable can be added to our Map.addLayer function.
 ```javascript
-var temp_vis = {min: -230.0, max: 300.0,  palette: ['blue', 'purple', 'cyan', 'green', 'yellow', 'red']};
+var temp_vis = {min: -230.0, max: 300.0,
+  palette: ['blue', 'purple', 'cyan', 'green', 'yellow', 'red']};
 Map.addLayer(temp_bioclim, temp_vis, 'Annual Mean Temperature');
 ```
 
@@ -153,7 +154,8 @@ var temp = temp_bioclim.clip(roi);
 
 ```javascript
 var precip_bioclim = bioclim.select('bio12');
-var precip_vis = {min: 0, max: 10000, palette: ['white', '00008B', 'black']};
+var precip_vis = {min: 0, max: 10000,
+  palette: ['white', '00008B', 'black']};
 var precip = precip_bioclim.clip(roi);iv.Map.addLayer(precip, precip_vis, 'Annual Precipitation');
 ```
   
