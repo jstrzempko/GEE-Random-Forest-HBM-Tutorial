@@ -315,7 +315,7 @@ print('RF Training overall accuracy: ', trainAccuracy.accuracy());
 Map.addLayer(ee.Image().paint(roi, 1, 2), {}, 'Region of Interest');
 ```
 
-## ExportImage
+## Export Image
 
 * To export the image to your google drive, set the parameters as follows:
 
